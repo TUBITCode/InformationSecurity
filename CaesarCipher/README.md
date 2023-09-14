@@ -16,17 +16,3 @@ The Caesar cipher is a simple cipher and one of the best known encryption algori
         - Shift the letter backwards by the key value while considering the wrapping around the alphabet (using modulo 26).
     - If char is not a letter, it is unchanged.
 3) Display the decrypted text.
-
-
-## Example
-### Encryption
-1) Choose the alphabet you are going to use.
-2) Choose a secret key (shift) that you are going to use in this case n.
-3) For every letter in the plain-text, replace it by a letter of the alphabet that is n letters away from the letter. (Ex: for a key of 1, a would become b, z would become a, etc.)
-4) The message should now be encoded.
-
-### Decryption
-1) Choose the alphabet that the message was encrypted with.
-2) Let n be the secret key the message is encoded in.
-3) For every letter in the cipher-text, replace it by a letter of the alphabet that is n letters behind in the alphabet from the letter. (Ex: for a key of 1, c would be b, a would be z with a key of 1.)
-4) The message should now be decoded
