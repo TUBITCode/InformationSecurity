@@ -1,39 +1,37 @@
 # Hill Cipher Encryption and Decryption Algorithm (2x2 Matrix)
 A Hill Cipher is a symmetric-key cryptographic algorithm used for encryption and decryption of text messages. It operates on blocks of text, typically with a square key matrix, and employs matrix multiplication to transform the plaintext into ciphertext and vice versa. 
 
-## Encryption:
-  1) Input:
-     - Get a 2x2 key matrix (`a`) that is invertible.
-     - Get a 2-letter message to be encrypted (`mes`).
-  2) Matrix Multiplication (Encryption):
-     - Initialize an empty 2x1 matrix for encryption (encrypt).
-     - Calculate `encrypt = a * mes`, where * denotes matrix multiplication.
-  3) Modulo and Character Conversion:
-    - For each element in the encrypt matrix, apply the following:
-       - Calculate `encrypt[i][0] % 26` to ensure it's within the range of alphabetic characters.
-       - Convert the result to a lowercase letter by adding 97 to it `((char)(encrypt[i][0] % 26 + 97))`.
-  4) Output:
-     - Display the encrypted string, which consists of the characters obtained in step 3.
+1) **Input**:
+   - Obtain a 2x2 key matrix `a` (It should be invertible).
+   - Obtain a 2-letter message `mes` to be encrypted.
 
-## Decryption:
-  1) Input:
-     - Get the same 2x2 key matrix (`a`) used for encryption.
-     - Get the encrypted message to be decrypted (encrypt).
-  2) Matrix Inversion:
-     - Calculate the inverse of the key matrix (`b`) using the formula for a 2x2 matrix:
-       - `b[0][0] = a[1][1] / det`
-       - `b[0][1] = -a[0][1] / det`
-       - `b[1][0] = -a[1][0] / det`
-       - `b[1][1] = a[0][0] / det`
-         where det is the determinant of the key matrix (`a`).
-  3) Matrix Multiplication (Decryption):
-     - Initialize an empty 2x1 matrix for decryption (decrypt).
-     - Calculate `decrypt = b * encrypt`, where * denotes matrix multiplication.
-  4) Modulo and Character Conversion:
-     - For each element in the decrypt matrix, apply the following:
-       - Calculate `decrypt[i][0] % 26` to ensure it's within the range of alphabetic characters.
-       - Convert the result to a lowercase letter by adding 97 to it `((char)(decrypt[i][0] % 26 + 97))`.
-  5) Output:
-     - Display the decrypted string, which consists of the characters obtained in step 4.
+2) **Encryption**:
+   - Initialize an empty 2x1 matrix `encrypt`.
+   - For each element `encrypt[i][j]` in the result:
+     - Calculate `encrypt[i][j]` using nested loops and matrix multiplication:
+       - Initialize `encrypt[i][j]` to 0.
+       - For each element `k` in the range `[0, 1]`:
+         - Update `encrypt[i][j]` as `encrypt[i][j] += a[i][k] * mes[k][j]`.
+   - Apply modulo 26 to each element of `encrypt` to ensure it's within the range of alphabetic characters.
+   - Convert the resulting elements to lowercase letters.
+   - Display the encrypted string.
+
+3) **Decryption**:
+   - Calculate the inverse of the key matrix `a` using the formula for a 2x2 matrix:
+     - Calculate the determinant `det` of `a` as `det = c[0][0] * c[1][1] - c[0][1] * c[1][0]`.
+     - Calculate each element `b[i][j]` of the inverse matrix `b` as:
+       - `b[0][0] = c[1][1] / det`
+       - `b[0][1] = -c[0][1] / det`
+       - `b[1][0] = -c[1][0] / det`
+       - `b[1][1] = c[0][0] / det`.
+   - Initialize an empty 2x1 matrix `decrypt`.
+   - For each element `decrypt[i][j]` in the result:
+     - Calculate `decrypt[i][j]` using nested loops and matrix multiplication:
+       - Initialize `decrypt[i][j]` to 0.
+       - For each element `k` in the range `[0, 1]`:
+         - Update `decrypt[i][j]` as `decrypt[i][j] += b[i][k] * encrypt[k][j]`.
+   - Apply modulo 26 to each element of `decrypt` to ensure it's within the range of alphabetic characters.
+   - Convert the resulting elements to lowercase letters.
+   - Display the decrypted string.
 
 Note: Ensure that the 2x2 key matrix is invertible for both encryption and decryption to work correctly.
